@@ -28,9 +28,11 @@ License
 int main(int argc, char *argv[])
 {
     // Initialise OF case
+    // 初始化一个OF实例（case）
     #include "setRootCase.H"
 
     // These two create the time system (instance called runTime) and fvMesh (instance called mesh).
+    // 创建 runTime 和 fvMesh
     #include "createTime.H"
     #include "createMesh.H"
 
