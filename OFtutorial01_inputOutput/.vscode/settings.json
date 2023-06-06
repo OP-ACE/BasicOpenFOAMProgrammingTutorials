@@ -1,5 +1,6 @@
 {
     "files.associations": {
-        "OFtutorial1.C": "cpp"
+        "OFtutorial1.C": "cpp",
+        "type_traits": "cpp"
     }
 }

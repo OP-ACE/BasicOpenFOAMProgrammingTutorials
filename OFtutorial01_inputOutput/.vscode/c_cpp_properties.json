@@ -13,6 +13,9 @@
       "compilerPath": "/usr/bin/gcc",
       "cStandard": "gnu11",
       "cppStandard": "gnu++14",
+      // "cStandard": "gnu11",
+      // "cppStandard": "gnu++17",
+
       "intelliSenseMode": "gcc-x64"
     }
   ],
