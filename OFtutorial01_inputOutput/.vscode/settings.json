@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "OFtutorial1.C": "cpp",
-        "type_traits": "cpp"
+        "type_traits": "cpp",
+        "IOdictionary.C": "cpp"
     }
 }
