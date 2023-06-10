@@ -30,6 +30,7 @@ int main(int argc, char *argv[])
     // ===
     // Define the help message for this application
     argList::addNote
+    // 这里没有声明就,直接就用argist. 因为fvCFD中包含了这句: #include "argList.H"
     (
         "Demonstrates how to handle command line options.\n"
         "\n"
@@ -42,7 +43,13 @@ int main(int argc, char *argv[])
     // prepare argument list
     argList::noParallel();
     argList::validArgs.append("someWord");
+    // argList::validArgs返回一个链表LList,见argist.C文件.
+    // alidArgs的签名: 
+    // SLList<Foam::string>  argList::validArgs;
+    // append是链表LList.H的函数,签名为:
+    // void append(const T& a)
     argList::validArgs.append("someScalar");
+
 
     // prepare options
     argList::addOption // string variable
