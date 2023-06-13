@@ -1,6 +1,8 @@
 {
     "files.associations": {
         "OFtutorial2.C": "cpp",
-        "argList.C": "cpp"
+        "argList.C": "cpp",
+        "OFtutorial2 copy.C": "cpp",
+        "原版OFtutorial2.C": "cpp"
     }
 }

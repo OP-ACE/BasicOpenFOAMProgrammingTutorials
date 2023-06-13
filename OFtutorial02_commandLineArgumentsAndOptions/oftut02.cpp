@@ -27,6 +27,14 @@ License
 
 int main(int argc, char *argv[])
 {
+    // ===================  001 =====================
+    //
+    // (001) 给 (由本源程序编译生存的)可执行程序(应用) 添加说明
+    // 
+    // Define the help message for this application
+    //
+    // (002)
+    // 这里没有声明就直接就用argist. 因为fvCFD中包含了这句: #include "argList.H"
     argList::addNote
     (
         "Demonstrates how to handle command line options.\n"
@@ -36,13 +44,50 @@ int main(int argc, char *argv[])
         "  someWord - does stuff\n"
         "  someScalar - does more things\n"
     );
+    //
+    // (003)效果:
+    //
+    // dyfluid @ testCase $ ofTutorial2
+    // 
+    // Usage: ofTutorial2 [OPTIONS] <someWord> <someScalar>
+    // options:
+    //   -case <dir>       specify alternate case directory, default is the cwd
+    //   -dict <word>      Path to an additional dictionary (not really used now)
+    //   -fileHandler <handler>
+    //                     override the fileHandler
+    //   -libs <(lib1 .. libN)>
+    //                     pre-load libraries
+    //   -noFunctionObjects
+    //                     do not execute functionObjects
+    //   -someInt <label>  Optional integer
+    //   -someSwitch       Switches from A to B
+    //   -srcDoc           display source code in browser
+    //   -doc              display application documentation in browser
+    //   -help             print the usage
+    // 
+    // Demonstrates how to handle command line options.
+    // 
+    // Input arguments:
+    // ----------------
+    //   someWord - does stuff
+    //   someScalar - does more things
+    // 
 
+    
+
+    // ===================  002 =======================
     // prepare argument list
     argList::noParallel();
     argList::validArgs.append("someWord");
+    // argList::validArgs返回一个链表LList,见argist.C文件.
+    // alidArgs的签名: 
+    // SLList<Foam::string>  argList::validArgs;
+    // append是链表LList.H的函数,签名为:
+    // void append(const T& a)
     argList::validArgs.append("someScalar");
 
-     // prepare options
+
+    // prepare options
     argList::addOption // string variable
     (
         "dict",
@@ -63,6 +108,10 @@ int main(int argc, char *argv[])
         "Optional integer"
     );
 
+    // ===
+    // create argument list
+    // This is normally defined inside setRootCase.H
+    // #include "setRootCase.H"
     Foam::argList args(argc, argv);
 
     return 0;
