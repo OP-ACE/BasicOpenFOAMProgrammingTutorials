@@ -43,27 +43,6 @@ int main(int argc, char *argv[])
     argList::validArgs.append("someWord");
     argList::validArgs.append("someScalar");
 
-    //  // prepare options
-    // argList::addOption // string variable
-    // (
-    //     "dict",
-    //     "word",
-    //     "Path to an additional dictionary (not really used now)"
-    // );
-
-    // argList::addBoolOption // on/off depending on whether option is given or not
-    // (
-    //     "someSwitch",
-    //     "Switches from A to B"
-    // );
-
-    // argList::addOption // integer variable
-    // (
-    //     "someInt",
-    //     "label",
-    //     "Optional integer"
-    // );
-
     Foam::argList args(argc, argv);
     // read arguments
     const word someWord = args[1];

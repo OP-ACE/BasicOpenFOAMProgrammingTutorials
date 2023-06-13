@@ -78,53 +78,70 @@ int main(int argc, char *argv[])
     // ===================  002 =======================
     // prepare argument list
     argList::noParallel();
+
+    // (2.1) 基金会版和ESI版OF中,添加argument的方法名不同:
+    //
+    // 基金会版: argList::validArgs.append
+    // ESI版  : argList::addArgument
+    //
     argList::validArgs.append("someWord");
+    argList::validArgs.append("someScalar");
     // argList::validArgs返回一个链表LList,见argist.C文件.
     // alidArgs的签名: 
     // SLList<Foam::string>  argList::validArgs;
     // append是链表LList.H的函数,签名为:
     // void append(const T& a)
-    argList::validArgs.append("someScalar");
+
+    // (2.2)
+    //   addArgument(const string & argName,
+    //               const string & usage = "" 
+    //              )		
+    //   Append a (mandatory) argument to validArgs. Definition at line 300 of file argList.C.
+    
+    // (2.3) addNote 和 validArgs.append
+    // addNote是对整个程序的说明,包括所有的必需和可选参数
+    // 而后者是添加Argument, 注意: 就是 validArgs.append 给出了argument的顺序约定
+    // 即,本例子中 第一个参数是 someWord, 第二个参数是 someScalar
 
 
     // prepare options
-    argList::addOption // string variable
-    (
-        "dict",
-        "word",
-        "Path to an additional dictionary (not really used now)"
-    );
+    // argList::addOption // string variable
+    // (
+    //     "dict",
+    //     "word",
+    //     "Path to an additional dictionary (not really used now)"
+    // );
 
-    argList::addBoolOption // on/off depending on whether option is given or not
-    (
-        "someSwitch",
-        "Switches from A to B"
-    );
+    // argList::addBoolOption // on/off depending on whether option is given or not
+    // (
+    //     "someSwitch",
+    //     "Switches from A to B"
+    // );
 
-    argList::addOption // integer variable
-    (
-        "someInt",
-        "label",
-        "Optional integer"
-    );
+    // argList::addOption // integer variable
+    // (
+    //     "someInt",
+    //     "label",
+    //     "Optional integer"
+    // );
 
     // ===
     // create argument list
     // This is normally defined inside setRootCase.H
-    // #include "setRootCase.H"
+    #include "setRootCase.H"
     Foam::argList args(argc, argv);
-    // if (!args.checkRootCase())
-    // {
-    //     Foam::FatalError.exit();
-    // }
+    if (!args.checkRootCase())
+    {
+        Foam::FatalError.exit();
+    }
 
-    // // ===
-    // // read arguments
-    // const word someWord = args[1];
-    // // NOTE: the built-in method for converting strings to other data types
-    // const scalar someScalar = args.argRead<scalar>(2);
+    // ===
+    // read arguments
+    const word someWord = args[1];
+    // NOTE: the built-in method for converting strings to other data types
+    const scalar someScalar = args.argRead<scalar>(2);
 
-    // Info << "Got argument word " << someWord << " and scalar " << someScalar << endl;
+    Info << "Got argument word " << someWord << " and scalar " << someScalar << endl;
 
     // // ===
     // // read options
@@ -148,7 +165,7 @@ int main(int argc, char *argv[])
     // args.optionReadIfPresent("someInt", someInt);
     // Info << "Integer option value " << someInt << endl;
     
-    // Info<< "End\n" << endl;
+    Info<< "End\n" << endl;
 
     return 0;
 }
