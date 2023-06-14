@@ -102,6 +102,10 @@ int main(int argc, char *argv[])
     // addNote是对整个程序的说明,包括所有的必需和可选参数
     // 而后者是添加Argument, 注意: 就是 validArgs.append 给出了argument的顺序约定
     // 即,本例子中 第一个参数是 someWord, 第二个参数是 someScalar
+    //
+    // (2.4) 静态方法 vs 动态方法
+    // 静态方法: 在生存对象前,针对整个类使用; 如 这里添加程序说明的方法 addNote, 添加argument的方法:validArgs.append
+    // 动态方法: 在生存对象后,针对每个具体的对象使用 如后面读取参数方法 argListObj.argRead<scalar>
 
 
     // prepare options
@@ -129,17 +133,17 @@ int main(int argc, char *argv[])
     // create argument list
     // This is normally defined inside setRootCase.H
     #include "setRootCase.H"
-    Foam::argList args(argc, argv);
-    if (!args.checkRootCase())
+    Foam::argList argListObj(argc, argv);
+    if (!argListObj.checkRootCase())
     {
         Foam::FatalError.exit();
     }
 
     // ===
     // read arguments
-    const word someWord = args[1];
+    const word someWord = argListObj[1];
     // NOTE: the built-in method for converting strings to other data types
-    const scalar someScalar = args.argRead<scalar>(2);
+    const scalar someScalar = argListObj.argRead<scalar>(2);
 
     Info << "Got argument word " << someWord << " and scalar " << someScalar << endl;
 
@@ -149,20 +153,20 @@ int main(int argc, char *argv[])
     // fileName dictPath("./system/defaultDict");
 
     // // conditional execution based on an option being passed
-    // if (args.optionFound("dict"))
+    // if (argListObj.optionFound("dict"))
     // {
-    //     args.optionReadIfPresent("dict", dictPath);
+    //     argListObj.optionReadIfPresent("dict", dictPath);
     //     Info << "Got an override flag for dictionary path" << endl;
     // }
     // Info << "Would read dict from " << dictPath << endl;
 
     // // switch option
-    // const bool someConstBool = args.optionFound("someSwitch");
+    // const bool someConstBool = argListObj.optionFound("someSwitch");
     // Info << "Boolean switch set to " << someConstBool << endl;
 
     // // numeric value option - same as string variables really
     // label someInt(0);
-    // args.optionReadIfPresent("someInt", someInt);
+    // argListObj.optionReadIfPresent("someInt", someInt);
     // Info << "Integer option value " << someInt << endl;
     
     Info<< "End\n" << endl;

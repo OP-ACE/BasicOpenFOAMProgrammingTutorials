@@ -4,7 +4,6 @@
         "argList.C": "cpp",
         "OFtutorial2 copy.C": "cpp",
         "原版OFtutorial2.C": "cpp",
-        "of2_readArgs.C": "cpp",
-        "readArgs.C": "cpp"
+        "of2_readArgs.C": "cpp"
     }
 }
