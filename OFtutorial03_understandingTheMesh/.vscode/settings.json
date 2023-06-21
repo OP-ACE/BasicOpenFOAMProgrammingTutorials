@@ -2,6 +2,7 @@
     "files.associations": {
         "OFtutorial3.C": "cpp",
         "IOobject.C": "cpp",
-        "polyMesh.C": "cpp"
+        "polyMesh.C": "cpp",
+        "fvMeshGeometry.C": "cpp"
     }
 }

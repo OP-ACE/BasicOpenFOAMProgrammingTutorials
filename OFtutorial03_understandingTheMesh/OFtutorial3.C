@@ -45,28 +45,51 @@ int main(int argc, char *argv[])
     //   (
     //       Foam::IOobject  //! 构造mesh时,用到了临时构造的 IOobject
     //       (
-    //           Foam::fvMesh::defaultRegion, //! 
+    //           Foam::fvMesh::defaultRegion, 
+                 //! 默认情况下，OpenFOAM使用名为"defaultRegion"的区域来表示整个网格
+                 //! 静态变量defaultRegion的值的类型为 word, 值可能为 region0
+                 //! 即, region0 这个word就是这个IOobject的名字了.
     //           runTime.timeName(), //! 文件名
-    //           runTime,
-    //           Foam::IOobject::MUST_READ
+    //           runTime,            //! 注册表(学生处, IOobject是学生, regIOobject是真正带你去注册的工作人员)
+    //           Foam::IOobject::MUST_READ //! 读取选项
+    //                                     //! 写入选项和是否注册均采用默认值
     //       )
     //   );
     //
     //   static Foam::word Foam::polyMesh::defaultRegion
     //   polyMesh.C中,显示defaultRegion为polyMesh的一个静态的word类型变量
     //   static word defaultRegion;
+    
+    // ! (1.3) OpenFoam中的Region
+    //   在OpenFOAM中，每个网格都可以分为多个区域。
+    //   这些区域可以用来定义不同的物理域，例如流体域、固体域等。
+    //   默认情况下，OpenFOAM使用名为"defaultRegion"的区域来表示整个网格。
+    //   
+    //   在Foam::fvMesh::defaultRegion中，defaultRegion是一个静态变量，
+    //   它存储了默认区域的名称。当创建一个新的网格对象时，如果没有指定区域名称，
+    //   OpenFOAM将自动使用"defaultRegion"。
+    //   这个变量可以在其他代码中使用，例如在创建边界条件或初始化场变量时。
+    //   在OpenFOAM中，Foam::fvMesh::defaultRegion是一个表示默认区域（region）的对象。
+    //   默认区域是指在网格（mesh）中没有被明确定义的区域。
+
+    //   在OpenFOAM中，网格被划分为不同的区域，每个区域可以有不同的物理属性、边界条件等。
+    //   defaultRegion对象用于表示没有被明确指定区域的单元格。
+    //   在网格划分过程中，如果某个单元格没有被指定区域，则默认被分配到defaultRegion中。
+    //   这样，可以在后续的计算过程中对这些单元格应用默认的物理属性和边界条件。
     //
-    // ! (1.2) IOobject类的构造函数(之一)
+    // ! (1.4) IOobject类的构造函数(之一): IOobject总是对应个文件
+    //   IOobject.H中的部分代码:
     //   Foam::IOobject::IOobject
     //   (
-    //       const fileName& path,             //! -->
-    //       const objectRegistry& registry,
-    //       readOption ro,
-    //       writeOption wo,
-    //       bool registerObject
+    //       const word& name,               //! IOobject的名字
+    //       const fileName& instance,       //! IOobject的文件名(包含路径)
+    //       const objectRegistry& registry, //! 对象的注册表
+    //       readOption r=NO_READ,           //! 读取选项
+    //       writeOption w=NO_WRITE,         //! 写入选项
+    //       bool registerObject=true        //! 是否注册?
     //   )
     
-    // ! (01.02) mesh的五要素: 
+    // ! (1.5) mesh的五要素: 
     // 
     // 可以发现其实是创建了一个fvMesh对象，叫做mesh。 
     // 创建这个fvMesh对象的时候程序读取了constant/polyMesh/目录下面的
