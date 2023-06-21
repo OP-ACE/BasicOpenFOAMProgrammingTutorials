@@ -32,37 +32,41 @@ int main(int argc, char *argv[])
 	// These two create the time system (instance called runTime) and fvMesh (instance called mesh).
     #include "createTime.H"
     #include "createMesh.H"
-    // ! ============================================== 01 cerateMesh.H就几句话 和 mesh的五要素
+    // ! ============================================== 1 cerateMesh.H就几句话 和 mesh的五要素
     
-    // ! (01.01) cerateMesh.H就几句话
+    // ! (1.1) cerateMesh.H就几句话
     // 
     //   Foam::Info
     //       << "Create mesh for time = "
     //       << runTime.timeName() << Foam::nl << Foam::endl;
     //   
-    // ! (01.02) fvMesh类的构造函数
+    // ! (1.2) fvMesh类的构造函数
     //   Foam::fvMesh mesh   //! 构造一个名为 mesh 的 fvMesh对象
     //   (
     //       Foam::IOobject  //! 构造mesh时,用到了临时构造的 IOobject
     //       (
-    //           Foam::fvMesh::defaultRegion,
+    //           Foam::fvMesh::defaultRegion, //! 
     //           runTime.timeName(), //! 文件名
     //           runTime,
     //           Foam::IOobject::MUST_READ
     //       )
     //   );
     //
-    // ! (01.02) IOobject类的构造函数(之一)
+    //   static Foam::word Foam::polyMesh::defaultRegion
+    //   polyMesh.C中,显示defaultRegion为polyMesh的一个静态的word类型变量
+    //   static word defaultRegion;
+    //
+    // ! (1.2) IOobject类的构造函数(之一)
     //   Foam::IOobject::IOobject
     //   (
-    //       const fileName& path,
+    //       const fileName& path,             //! -->
     //       const objectRegistry& registry,
     //       readOption ro,
     //       writeOption wo,
     //       bool registerObject
     //   )
     
-    // ! (01.02) mesh的五要素
+    // ! (01.02) mesh的五要素: 
     // 
     // 可以发现其实是创建了一个fvMesh对象，叫做mesh。 
     // 创建这个fvMesh对象的时候程序读取了constant/polyMesh/目录下面的
