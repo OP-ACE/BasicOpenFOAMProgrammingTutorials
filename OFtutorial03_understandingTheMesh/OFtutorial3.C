@@ -32,6 +32,47 @@ int main(int argc, char *argv[])
 	// These two create the time system (instance called runTime) and fvMesh (instance called mesh).
     #include "createTime.H"
     #include "createMesh.H"
+    // ! ============================================== 01 cerateMesh.H就几句话 和 mesh的五要素
+    
+    // ! (01.01) cerateMesh.H就几句话
+    // 
+    //   Foam::Info
+    //       << "Create mesh for time = "
+    //       << runTime.timeName() << Foam::nl << Foam::endl;
+    //   
+    // ! (01.02) fvMesh类的构造函数
+    //   Foam::fvMesh mesh   //! 构造一个名为 mesh 的 fvMesh对象
+    //   (
+    //       Foam::IOobject  //! 构造mesh时,用到了临时构造的 IOobject
+    //       (
+    //           Foam::fvMesh::defaultRegion,
+    //           runTime.timeName(), //! 文件名
+    //           runTime,
+    //           Foam::IOobject::MUST_READ
+    //       )
+    //   );
+    //
+    // ! (01.02) IOobject类的构造函数(之一)
+    //   Foam::IOobject::IOobject
+    //   (
+    //       const fileName& path,
+    //       const objectRegistry& registry,
+    //       readOption ro,
+    //       writeOption wo,
+    //       bool registerObject
+    //   )
+    
+    // ! (01.02) mesh的五要素
+    // 
+    // 可以发现其实是创建了一个fvMesh对象，叫做mesh。 
+    // 创建这个fvMesh对象的时候程序读取了constant/polyMesh/目录下面的
+    // points、faces、owner、neighbour和boundary这5个文件。
+    // 这5个文件就是OpenFOAM存储网格的文件。
+    // 它们可以用blockMesh生成，也可以用前处理工具从其他格式的网格文件
+    // 转换得到(比如用fluentMeshtoFoam、gmshToFoam等等)。 
+    // 有了这个对象，我们就可以从这个对象获得网格的所有信息（如cell center的坐标、cell的体积等等),
+    // 这些信息在创建fvMesh对象时，其构造函数就以自动计算好了。
+    
 
 	// runTime and mesh are instances of objects (or classes).
 	// If you are not familiar with what a class or object is, it is HIGHLY RECOMMENDED you visit this
