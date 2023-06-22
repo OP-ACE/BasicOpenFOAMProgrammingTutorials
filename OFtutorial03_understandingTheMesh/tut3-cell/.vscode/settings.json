@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "tut3-cell.C": "cpp",
+        "fvcfd.h": "c",
+        "fvCFD.H": "cpp"
+    }
+}

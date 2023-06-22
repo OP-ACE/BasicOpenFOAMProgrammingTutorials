@@ -109,6 +109,22 @@ int main(int argc, char *argv[])
 	// It is also important to realise that mesh.C() and .Cf() return vector fields denoting centres of each
     // cell and internal face.
 	// Calling the mesh.C().size() method therefore yields the total size of the mesh.
+
+    //! 2. of中很多对象太大,往往采用指向对象的指针,当一个函数实在要返回一个这个对象时,会解引用这个指针
+    //
+    //!    比如这里的 mesh.C()
+    //     fvMeshGeometry.C中的部分代码:
+    //     const Foam::volVectorField& Foam::fvMesh::C() const
+    //     {
+    //         if (!CPtr_)
+    //         {
+    //             makeC();
+    //         }
+    //     
+    //         return *CPtr_; //! 解引用
+    //     }
+
+
 	Info << "Hello there, the most recent time folder found is " << runTime.timeName() << nl
 		 << "The mesh has " << mesh.C().size() << " cells and " << mesh.Cf().size()
          << " internal faces in it. Wubalubadubdub!" << nl << endl;
