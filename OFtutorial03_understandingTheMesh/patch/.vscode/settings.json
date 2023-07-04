@@ -1,0 +1,10 @@
+{
+    "files.associations": {
+        "OFtutorial3.C": "cpp",
+        "argList.C": "cpp",
+        "List.C": "cpp",
+        "HashTable.C": "cpp",
+        "HashTableCore.C": "cpp",
+        "messageStream.C": "cpp"
+    }
+}
